@@ -8,123 +8,6 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-/*
-
-- we cannot do the same quest for k days (possible on k+1-th day) 
-- position of a[i] doesn't matter
-- we can do "nothing" on a particular day
-- zero (0) is a possible answer (meaning = there is no interval for each quest)
-- a[i] is not distinct
-
-goals:
-- find max value of k
-- gain at least c coins over d days (basically, within d days)
-
-"earn c coins over d days"
-
-------------------------
-
-1
-2 5 4
-1 2
-
-earn 5 coins over 4 days
-
-maybe binary search? <-
-
-k = 2:
-2 1 0 2
-
-k = 1:
-2 1 2 1
-
-ans: 2
-
-------------------------
-
-1
-2 20 10
-100 10
-
-100 ? ? ? ? ? ? ? ? ?
-
-occurs if max(a[1], a[2], ..., a[n]) > c
-
-ans: Infinity
-
-------------------------
-
-1
-3 100 3
-7 2 6
-
-7 7 7
-
-even if k = 0, it's impossible to reach 100
-occurs if max(a[1], a[2], ..., a[n]) * d < c
-
-ans: Impossible
-
-------------------------
-
-1
-4 20 3
-4 5 6 7
-
-7 6 7
-
-ans: 1
-
-------------------------
-
-1
-2 20 4
-5 1
-
-5 5 5 5
-
-ans: 0
-
-------------------------
-
-1
-4 40 10
-4 5 6 7
-
-7 6 5 4
-
-k = 0:
-7 7 7 7 7 7 7 7 7 7
-
-k = 1:
-7 6 7 6 7 6 7 6 7 6
-
-k = 2:
-7 6 5 7 6 5 7 6 5 7
-
-k = 3:
-7 6 5 4 7 6 5 4 7 6
-
-k = 4:
-7 6 5 4 0 7 6 5 4 0
-
-k = 5:
-7 6 5 4 0 0 7 6 5 4
-
-k = 6:
-7 6 5 4 0 0 0 7 6 5
-
-let k = mid + 1,
-temp = ceil(d / k)
-=> d -= temp
-=> k, k - 1, k - 2, ..., 1
-
-ans: 6
-
-------------------------
-
- */
-
 public class Main {
 	
 	public static void main(String[] args) {
@@ -146,14 +29,6 @@ public class Main {
 					return -Long.compare(o1, o2);
 				}
 			});
-//			if (a[0] > c) {
-//				System.out.println("Infinity");
-//				continue;
-//			}
-//			if (a[0] * d < c) {
-//				System.out.println("Impossible");
-//				continue;
-//			}
 			int low = 0, high = d, k = -1;
 			while (low <= high) {
 				int mid = low + (high - low) / 2;
